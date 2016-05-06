@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct CategoryRepository {
+    var id: String
+    var name: String
+}

@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import Firebase
+
+class RootRepository: NSObject {
+    let myRootRef: Firebase!
+    init(childPath:String) {
+        self.myRootRef = Firebase(url: "\(DeviceConst().firebaseRoot)/\(childPath)")
+    }
+}

@@ -7,3 +7,13 @@
 //
 
 import Foundation
+import UIKit
+
+class DetailViewCell: UITableViewCell {
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var postLabel: UILabel!
+    func loadContent(content: ContentRepository) {
+        dateLabel.text = content.date
+        postLabel.text = content.text
+    }
+}

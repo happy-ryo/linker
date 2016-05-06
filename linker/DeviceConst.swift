@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+final class DeviceConst {
+    let firebaseRoot = "https://linker-dev.firebaseio.com"
+}

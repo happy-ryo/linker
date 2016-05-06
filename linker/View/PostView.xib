@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -9,7 +9,59 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view tag="999" contentMode="scaleToFill" restorationIdentifier="PostView" translatesAutoresizingMaskIntoConstraints="NO" id="ZkJ-Xo-LPe">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4b5-uL-aok">
+                            <rect key="frame" x="540" y="0.0" width="60" height="55"/>
+                            <color key="backgroundColor" red="0.82745098039999998" green="0.99215686270000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="IDU-v7-sPF"/>
+                                <constraint firstAttribute="width" constant="60" id="roc-lu-spX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                            <color key="tintColor" red="0.58823529409999997" green="0.90980392160000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="post"/>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k1C-Ii-9C0">
+                            <rect key="frame" x="0.0" y="43" width="540" height="2"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="8np-22-drU"/>
+                            </constraints>
+                        </view>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRe-gg-2NT">
+                            <rect key="frame" x="79" y="8" width="453" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="jTF-9l-OVX"/>
+                            </constraints>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.58823529409999997" green="0.90980392160000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="4b5-uL-aok" firstAttribute="leading" secondItem="gRe-gg-2NT" secondAttribute="trailing" constant="8" id="Ccz-Gn-i4j"/>
+                        <constraint firstItem="4b5-uL-aok" firstAttribute="top" secondItem="ZkJ-Xo-LPe" secondAttribute="top" id="Hfw-oW-QnQ"/>
+                        <constraint firstItem="k1C-Ii-9C0" firstAttribute="leading" secondItem="ZkJ-Xo-LPe" secondAttribute="leading" id="LR8-It-hne"/>
+                        <constraint firstAttribute="bottom" secondItem="4b5-uL-aok" secondAttribute="bottom" id="Lrd-iU-Psx"/>
+                        <constraint firstAttribute="trailing" secondItem="4b5-uL-aok" secondAttribute="trailing" id="Owt-pn-2DW"/>
+                        <constraint firstAttribute="bottom" secondItem="k1C-Ii-9C0" secondAttribute="bottom" constant="10" id="PiJ-Mp-9SR"/>
+                        <constraint firstItem="gRe-gg-2NT" firstAttribute="leading" secondItem="ZkJ-Xo-LPe" secondAttribute="leading" constant="79" id="cUF-Xe-soc"/>
+                        <constraint firstItem="4b5-uL-aok" firstAttribute="leading" secondItem="k1C-Ii-9C0" secondAttribute="trailing" id="iak-df-zGm"/>
+                        <constraint firstItem="k1C-Ii-9C0" firstAttribute="top" secondItem="gRe-gg-2NT" secondAttribute="bottom" constant="3" id="t5G-Ky-dm1"/>
+                        <constraint firstItem="gRe-gg-2NT" firstAttribute="top" secondItem="ZkJ-Xo-LPe" secondAttribute="top" constant="8" id="xlK-1E-pIy"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ZkJ-Xo-LPe" secondAttribute="trailing" id="6kY-7O-CXt"/>
+                <constraint firstItem="ZkJ-Xo-LPe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="JdW-i3-WqK"/>
+                <constraint firstItem="ZkJ-Xo-LPe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="S6g-Ko-oE9"/>
+            </constraints>
         </view>
     </objects>
 </document>

@@ -1,0 +1,51 @@
+PODS:
+  - Alamofire (2.0.2)
+  - Alamofire-SwiftyJSON (2.0.0-beta.1)
+  - AMScrollingNavbar (2.0.14)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
+  - CryptoSwift (0.4)
+  - Fabric (1.6.7)
+  - Firebase (2.5.1)
+  - KeychainAccess (2.3.5)
+  - PKHUD (3.1.0)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 2.0.2)
+  - Alamofire-SwiftyJSON (from `https://raw.githubusercontent.com/pdutourgeerling/Alamofire-SwiftyJSON-Podspec/master/Alamofire-SwiftyJSON.podspec`)
+  - AMScrollingNavbar (~> 2.0.1)
+  - Crashlytics (~> 3.7)
+  - CryptoSwift
+  - Firebase (>= 2.5.1)
+  - KeychainAccess
+  - PKHUD
+  - SDWebImage (~> 3.7)
+  - SwiftyJSON
+
+EXTERNAL SOURCES:
+  Alamofire-SwiftyJSON:
+    :podspec: https://raw.githubusercontent.com/pdutourgeerling/Alamofire-SwiftyJSON-Podspec/master/Alamofire-SwiftyJSON.podspec
+
+CHECKOUT OPTIONS:
+  Alamofire-SwiftyJSON:
+    :commit: edee0486d60489807c6488e5f0d08b32c1985d92
+    :git: https://github.com/SwiftyJSON/Alamofire-SwiftyJSON.git
+
+SPEC CHECKSUMS:
+  Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
+  Alamofire-SwiftyJSON: 2fe2c7a0eef8218011c64b8ada623a8f5592196a
+  AMScrollingNavbar: be1de69f46cea4667026400db6cb22e783f9533d
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  CryptoSwift: 584eac7d00b2f497fe7b20de271b8c0c52fff844
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
+  KeychainAccess: e283c1981a6c5655e1984cd411c6faf16fa165ae
+  PKHUD: 4167eccdb1b3a892fd80ce2b51cb6ba412a889ab
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+COCOAPODS: 0.39.0
