@@ -4,7 +4,7 @@ PODS:
   - AMScrollingNavbar (2.0.14)
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
-  - CryptoSwift (0.4)
+  - CryptoSwift (0.4.1)
   - Fabric (1.6.7)
   - Firebase (2.5.1)
   - KeychainAccess (2.3.5)
@@ -40,7 +40,7 @@ SPEC CHECKSUMS:
   Alamofire-SwiftyJSON: 2fe2c7a0eef8218011c64b8ada623a8f5592196a
   AMScrollingNavbar: be1de69f46cea4667026400db6cb22e783f9533d
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
-  CryptoSwift: 584eac7d00b2f497fe7b20de271b8c0c52fff844
+  CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   KeychainAccess: e283c1981a6c5655e1984cd411c6faf16fa165ae
