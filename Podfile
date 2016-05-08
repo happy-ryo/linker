@@ -15,6 +15,8 @@ pod 'KeychainAccess'
 pod 'CryptoSwift'
 pod "PKHUD"
 pod 'AMScrollingNavbar', '~> 2.0.1'
+pod 'AWSS3'
+pod 'AWSCognito'
 end
 
 target 'linkerTests' do

@@ -9,7 +9,7 @@
 import UIKit
 import AMScrollingNavbar
 
-class DetailViewController: UIViewController {
+class DetailViewController: ScrollingNavigationViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var postButton: UIButton!
@@ -20,7 +20,9 @@ class DetailViewController: UIViewController {
 
     private var isObserving = false
     private let defaultHeight: CGFloat = 34.0
-
+    
+    var postWindow: UIWindow?
+    var mainWindow: UIWindow?
     var timeLineRepository: TimeLineRepository? {
         didSet {
             self.configureView()
@@ -36,8 +38,8 @@ class DetailViewController: UIViewController {
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail = self.detailItem {
-        }
+//        if let detail = self.detailItem {
+//        }
     }
 
     override func viewDidLoad() {
@@ -50,6 +52,7 @@ class DetailViewController: UIViewController {
         if let tableView = self.tableView {
             tableView.rowHeight = UITableViewAutomaticDimension
             tableView.estimatedRowHeight = 80
+            self.scrollViewShouldScrollToTop(tableView)
         }
         if !isObserving {
             let notification = NSNotificationCenter.defaultCenter()
@@ -67,7 +70,7 @@ class DetailViewController: UIViewController {
                 self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
             })
         }
-
+        self.postButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(DetailViewController.openPostView)))
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -108,18 +111,25 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func postContent() {
+        self.post(self.textView)
+        self.textViewHeight.constant = defaultHeight
+    }
+    
+    func post(textView:UITextView) {
         if textView.text.characters.count == 0 {
             return
         }
         if let timeLineRepository = self.timeLineRepository {
             timeLineRepository.post(ContentRepository(userRepository: UserRepository(), text: textView.text))
             textView.text = ""
-            self.textViewHeight.constant = defaultHeight
         }
         textView.resignFirstResponder()
     }
 
     func keyboardWillShow(notification: NSNotification?) {
+        if let postWindow = self.postWindow {
+            return
+        }
         if let notification = notification,
             let userInfo = notification.userInfo,
             let frameEndUserInfoKey = userInfo[UIKeyboardFrameEndUserInfoKey],
@@ -189,5 +199,39 @@ extension DetailViewController: UITableViewDataSource {
         cell.loadContent((timeLineRepository?.contents[indexPath.row])!)
         cell.layoutMargins = UIEdgeInsetsZero
         return cell
+    }
+}
+
+extension DetailViewController {
+    func openPostView() {
+        if postWindow != nil {
+            return
+        }
+        self.textView.resignFirstResponder()
+        mainWindow = UIApplication.sharedApplication().keyWindow
+        let rect = UIScreen.mainScreen().bounds
+        let window = UIWindow(frame: rect)
+        window.windowLevel = UIWindowLevelNormal + 5.0
+        let postViewController = PostViewController(nibName: "PostView", bundle: nil)
+        window.rootViewController = postViewController
+        postWindow = window
+        window.makeKeyAndVisible()
+        postViewController.closeButton.target = self
+        postViewController.closeButton.action = #selector(DetailViewController.closePostView)
+        postViewController.postButton.target = self
+        postViewController.postButton.action = #selector(DetailViewController.postContentFromPostView)
+        postViewController.timeLineRepository = self.timeLineRepository
+        postViewController.textView.becomeFirstResponder()
+    }
+    
+    func postContentFromPostView() {
+        let controller = postWindow?.rootViewController as! PostViewController
+        self.post(controller.textView)
+        self.closePostView()
+    }
+    
+    func closePostView() {
+        mainWindow?.makeKeyAndVisible()
+        postWindow = nil
     }
 }
