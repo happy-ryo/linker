@@ -71,7 +71,11 @@
             <items>
                 <barButtonItem title="close" width="28" id="joE-ft-ZsQ"/>
                 <barButtonItem style="plain" systemItem="flexibleSpace" id="bSq-xF-Jjc"/>
-                <barButtonItem title="pic" id="WTg-r4-0pc"/>
+                <barButtonItem title="pic" id="WTg-r4-0pc">
+                    <connections>
+                        <action selector="openPhotolibrary" destination="-1" id="Mem-CZ-yUR"/>
+                    </connections>
+                </barButtonItem>
                 <barButtonItem style="plain" systemItem="flexibleSpace" id="Trh-J3-oko"/>
                 <barButtonItem title="music" id="imu-se-ojz"/>
                 <barButtonItem style="plain" systemItem="flexibleSpace" id="4Qj-DA-atS"/>

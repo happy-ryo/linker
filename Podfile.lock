@@ -14,9 +14,9 @@ PODS:
   - Firebase (2.5.1)
   - KeychainAccess (2.3.5)
   - PKHUD (3.1.0)
-  - SDWebImage (3.7.5):
-    - SDWebImage/Core (= 3.7.5)
-  - SDWebImage/Core (3.7.5)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -55,7 +55,7 @@ SPEC CHECKSUMS:
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   KeychainAccess: e283c1981a6c5655e1984cd411c6faf16fa165ae
   PKHUD: 4167eccdb1b3a892fd80ce2b51cb6ba412a889ab
-  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

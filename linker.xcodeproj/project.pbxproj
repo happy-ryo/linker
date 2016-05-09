@@ -18,6 +18,7 @@
 		8967042A1CD77B2800041C8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896704281CD77B2800041C8C /* LaunchScreen.storyboard */; };
 		896704351CD77B2800041C8C /* linkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896704341CD77B2800041C8C /* linkerTests.swift */; };
 		896704401CD77B2800041C8C /* linkerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8967043F1CD77B2800041C8C /* linkerUITests.swift */; };
+		898A8E431CE0851C006BB581 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 898A8E421CE0851C006BB581 /* Photos.framework */; };
 		89A828241CD8824E00BE9788 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A828231CD8824E00BE9788 /* CategoryRepository.swift */; };
 		89A828261CD884E200BE9788 /* RootRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A828251CD884E200BE9788 /* RootRepository.swift */; };
 		89A828281CD89A6E00BE9788 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A828271CD89A6E00BE9788 /* UserRepository.swift */; };
@@ -68,6 +69,7 @@
 		8967043B1CD77B2800041C8C /* linkerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = linkerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8967043F1CD77B2800041C8C /* linkerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = linkerUITests.swift; sourceTree = "<group>"; };
 		896704411CD77B2800041C8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		898A8E421CE0851C006BB581 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		89A828231CD8824E00BE9788 /* CategoryRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		89A828251CD884E200BE9788 /* RootRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootRepository.swift; sourceTree = "<group>"; };
 		89A828271CD89A6E00BE9788 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				898A8E431CE0851C006BB581 /* Photos.framework in Frameworks */,
 				BC1F4B75C7C00D99E66A0E04 /* Pods_linker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +210,7 @@
 		C2D5E0391E6BD8BDBD2F160D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				898A8E421CE0851C006BB581 /* Photos.framework */,
 				09D03C7BAD355C0A0855722E /* Pods_linker.framework */,
 			);
 			name = Frameworks;
@@ -564,14 +568,14 @@
 			baseConfigurationReference = 840E3377B8D52FC05E765D93 /* Pods-linker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ryo Iwama (Z99BC37WX8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryo Iwama (Z99BC37WX8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = linker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.citronsyrup.linker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "de34f837-64fa-44e8-8468-043a1c7397ad";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -580,14 +584,14 @@
 			baseConfigurationReference = 4F74384DC1C92182319A30EA /* Pods-linker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryo Iwama (X9AMR5X2G8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryo Iwama (X9AMR5X2G8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = linker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.citronsyrup.linker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b9b2c8d-8278-4891-8dca-928b3e307430";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
