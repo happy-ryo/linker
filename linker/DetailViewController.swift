@@ -233,6 +233,7 @@ extension DetailViewController {
         let controller = postWindow?.rootViewController as! PostViewController
         if let timeLineRepository = self.timeLineRepository {
             timeLineRepository.post(controller)
+            self.closePostView()
         }
     }
 

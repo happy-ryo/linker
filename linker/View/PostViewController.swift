@@ -56,19 +56,19 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-        let pickedURL: NSURL = info[UIImagePickerControllerReferenceURL] as! NSURL
-        let fetchResult = PHAsset.fetchAssetsWithALAssetURLs([pickedURL], options: nil)
-        let asset = fetchResult.firstObject as! PHAsset
-
-        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) { [unowned self](data: NSData?, uti: String?, UIImageOrientation, info: [NSObject: AnyObject]?) in
-            if let info = info {
-                self.postImagePath = info["PHImageFileURLKey"] as? NSURL
-            }
-            picker.dismissViewControllerAnimated(true, completion: nil)
-            self.textView.becomeFirstResponder()
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        let docDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let fileName = "hoge.png"
+        let filePath = "\(docDir)/\(fileName)"
+        let png = UIImagePNGRepresentation(image)
+        do {
+          try NSFileManager.defaultManager().removeItemAtPath(filePath)
+        } catch {
+            
         }
-
+        try! png?.writeToFile(filePath, options: NSDataWritingOptions.DataWritingWithoutOverwriting)
+        self.postImagePath = NSURL(string: "file://\(filePath)")
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        self.textView.becomeFirstResponder()
     }
-
 }

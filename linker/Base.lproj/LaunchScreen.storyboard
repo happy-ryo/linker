@@ -16,17 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="linker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LhP-U0-vLC">
-                                <rect key="frame" x="214" y="227" width="173" height="146"/>
-                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="74"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="nO4-zI-cma">
+                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Hx2-70-Vwt"/>
+                                    <constraint firstAttribute="width" constant="300" id="ea4-dT-UMJ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.64301306009292603" green="0.92675536870956421" blue="0.88978725671768188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LhP-U0-vLC" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="PbU-gS-7Yg"/>
-                            <constraint firstItem="LhP-U0-vLC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Y1d-YW-aI0"/>
+                            <constraint firstItem="nO4-zI-cma" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="KL5-R9-D3a"/>
+                            <constraint firstItem="nO4-zI-cma" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xdO-Tc-t6t"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -35,4 +36,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iTunesArtwork" width="512" height="512"/>
+    </resources>
 </document>
