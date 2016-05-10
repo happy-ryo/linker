@@ -69,6 +69,7 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
         try! png?.writeToFile(filePath, options: NSDataWritingOptions.DataWritingWithoutOverwriting)
         self.postImagePath = NSURL(string: "file://\(filePath)")
         picker.dismissViewControllerAnimated(true, completion: nil)
+        self.postImage.image = image
         self.textView.becomeFirstResponder()
     }
 }

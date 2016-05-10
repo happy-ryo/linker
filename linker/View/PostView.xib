@@ -11,6 +11,7 @@
                 <outlet property="countButton" destination="fwy-1w-0eL" id="Q9J-De-Rnz"/>
                 <outlet property="nameLabel" destination="zL5-7a-9h8" id="i9I-cH-ODm"/>
                 <outlet property="postButton" destination="3Dl-6E-75R" id="Vwx-dz-CMR"/>
+                <outlet property="postImage" destination="UWe-A4-VVI" id="OcN-0H-vKJ"/>
                 <outlet property="textView" destination="0Tw-uW-BxC" id="rdb-SB-JZJ"/>
                 <outlet property="view" destination="XL3-F3-IbR" id="fOg-zQ-LHq"/>
             </connections>
@@ -52,6 +53,13 @@
                         <outlet property="delegate" destination="-1" id="8is-0b-ecT"/>
                     </connections>
                 </textView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWe-A4-VVI">
+                    <rect key="frame" x="411" y="140" width="181" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="2s6-NF-VO3"/>
+                        <constraint firstAttribute="width" constant="100" id="MEr-jf-Tk8"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.70478723404255328" colorSpace="calibratedRGB"/>
             <constraints>
@@ -59,7 +67,9 @@
                 <constraint firstItem="w5R-8k-bPA" firstAttribute="leading" secondItem="XL3-F3-IbR" secondAttribute="leading" id="SDR-zv-MCe"/>
                 <constraint firstItem="w5R-8k-bPA" firstAttribute="top" secondItem="XL3-F3-IbR" secondAttribute="top" id="ZAh-eC-AUD"/>
                 <constraint firstAttribute="trailing" secondItem="0Tw-uW-BxC" secondAttribute="trailing" id="cqg-IG-1ip"/>
+                <constraint firstAttribute="trailing" secondItem="UWe-A4-VVI" secondAttribute="trailing" constant="8" id="kts-UK-0cA"/>
                 <constraint firstItem="0Tw-uW-BxC" firstAttribute="top" secondItem="w5R-8k-bPA" secondAttribute="bottom" id="p7t-LV-IOm"/>
+                <constraint firstItem="UWe-A4-VVI" firstAttribute="top" secondItem="w5R-8k-bPA" secondAttribute="bottom" constant="70" id="rk5-En-CyI"/>
                 <constraint firstItem="0Tw-uW-BxC" firstAttribute="leading" secondItem="XL3-F3-IbR" secondAttribute="leading" id="ro4-32-1lA"/>
             </constraints>
             <point key="canvasLocation" x="275" y="303"/>

@@ -220,7 +220,7 @@
                                                     <color key="textColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aQF-wf-yae">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aQF-wf-yae">
                                                     <rect key="frame" x="61" y="47" width="471" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="VSO-Bh-gvV"/>
@@ -267,7 +267,6 @@
                                         <color key="tintColor" red="0.58823529409999997" green="0.90980392160000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="post"/>
                                         <connections>
-                                            <action selector="postContent" destination="XS1-8y-YBf" eventType="touchUpInside" id="F5c-co-SXs"/>
                                             <action selector="postContent" destination="waW-0o-b0T" eventType="touchUpInside" id="kXG-9O-NMq"/>
                                         </connections>
                                     </button>
@@ -337,100 +336,12 @@
             </objects>
             <point key="canvasLocation" x="606" y="129"/>
         </scene>
-        <!--Chat View Controller-->
-        <scene sceneID="DLL-aj-aIa">
-            <objects>
-                <viewController id="XS1-8y-YBf" customClass="ChatViewController" customModule="linker" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wIP-e8-5yu"/>
-                        <viewControllerLayoutGuide type="bottom" id="eMY-wC-L8h"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WJs-xA-Hce">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dL-h4-dzL">
-                                <rect key="frame" x="0.0" y="545" width="600" height="55"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L25-0j-I1e">
-                                        <rect key="frame" x="540" y="0.0" width="60" height="55"/>
-                                        <color key="backgroundColor" red="0.82745098039215681" green="0.99215686274509807" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="tRP-ip-f1Z"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="tintColor" red="0.58823529409999997" green="0.90980392160000001" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="post"/>
-                                        <connections>
-                                            <action selector="postContent" destination="XS1-8y-YBf" eventType="touchUpInside" id="a4t-M5-M5N"/>
-                                        </connections>
-                                    </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="hoge" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Upl-jc-yte">
-                                        <rect key="frame" x="79" y="8" width="453" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="hkf-SH-GAZ"/>
-                                        </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ljP-qa-vvj">
-                                        <rect key="frame" x="0.0" y="43" width="540" height="2"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="HyH-t8-E4c"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.58823529411764708" green="0.90980392156862744" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="ljP-qa-vvj" firstAttribute="leading" secondItem="9dL-h4-dzL" secondAttribute="leading" id="42b-0T-WzH"/>
-                                    <constraint firstItem="L25-0j-I1e" firstAttribute="leading" secondItem="Upl-jc-yte" secondAttribute="trailing" constant="8" id="Est-Vk-G5P"/>
-                                    <constraint firstItem="ljP-qa-vvj" firstAttribute="top" secondItem="Upl-jc-yte" secondAttribute="bottom" constant="3" id="Q0I-mS-tOw"/>
-                                    <constraint firstAttribute="bottom" secondItem="L25-0j-I1e" secondAttribute="bottom" id="QL3-sJ-V0y"/>
-                                    <constraint firstItem="Upl-jc-yte" firstAttribute="leading" secondItem="9dL-h4-dzL" secondAttribute="leading" constant="79" id="WfK-by-Fy3"/>
-                                    <constraint firstAttribute="height" constant="55" id="ZcV-9Y-d0h"/>
-                                    <constraint firstItem="Upl-jc-yte" firstAttribute="top" secondItem="9dL-h4-dzL" secondAttribute="top" constant="8" id="hVA-9L-pBb"/>
-                                    <constraint firstAttribute="trailing" secondItem="L25-0j-I1e" secondAttribute="trailing" id="jP6-VY-5Vc"/>
-                                    <constraint firstItem="L25-0j-I1e" firstAttribute="leading" secondItem="ljP-qa-vvj" secondAttribute="trailing" id="pgi-ST-yT5"/>
-                                    <constraint firstItem="L25-0j-I1e" firstAttribute="top" secondItem="9dL-h4-dzL" secondAttribute="top" id="z6P-ZV-ZFc"/>
-                                </constraints>
-                            </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OKa-eF-1bL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="545"/>
-                                <connections>
-                                    <segue destination="Gem-o9-MYE" kind="embed" id="bmg-2y-g1k"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="OKa-eF-1bL" firstAttribute="top" secondItem="WJs-xA-Hce" secondAttribute="topMargin" id="4kW-1B-dZV"/>
-                            <constraint firstItem="eMY-wC-L8h" firstAttribute="top" secondItem="9dL-h4-dzL" secondAttribute="bottom" id="5Gg-1a-q9n"/>
-                            <constraint firstAttribute="trailing" secondItem="9dL-h4-dzL" secondAttribute="trailing" id="S6j-l1-E6K"/>
-                            <constraint firstItem="9dL-h4-dzL" firstAttribute="top" secondItem="OKa-eF-1bL" secondAttribute="bottom" id="cgs-R5-DzN"/>
-                            <constraint firstItem="9dL-h4-dzL" firstAttribute="leading" secondItem="WJs-xA-Hce" secondAttribute="leading" id="fjN-zB-bP8"/>
-                            <constraint firstItem="OKa-eF-1bL" firstAttribute="leading" secondItem="WJs-xA-Hce" secondAttribute="leading" id="hZK-MC-ajM"/>
-                            <constraint firstAttribute="trailing" secondItem="OKa-eF-1bL" secondAttribute="trailing" id="w9b-9h-hpv"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="0ib-3i-r9U"/>
-                    <connections>
-                        <outlet property="postButton" destination="L25-0j-I1e" id="usk-Ej-OHy"/>
-                        <outlet property="textView" destination="Upl-jc-yte" id="nkD-Ns-O2q"/>
-                        <outlet property="textViewHeight" destination="hkf-SH-GAZ" id="jxd-CH-nPJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wuH-Ci-p3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="606" y="907"/>
-        </scene>
         <!--Chat Time Line View Controller-->
         <scene sceneID="d3f-EV-xZR">
             <objects>
                 <tableViewController id="Gem-o9-MYE" customClass="ChatTimeLineViewController" customModule="linker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jOV-sT-LUF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="545"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
