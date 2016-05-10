@@ -12,21 +12,40 @@ struct ContentRepository {
     let userId: String
     let text: String
     let date: String
-    
-    init(userId:String,text:String,date:String){
+    let imagePath: String
+
+    init(userId: String, text: String, date: String, imagePath: String) {
         self.userId = userId
         self.text = text
         self.date = date
+        self.imagePath = imagePath
     }
-    
-    init(userRepository:UserRepository ,text:String){
+
+    init(userRepository: UserRepository, text: String) {
         self.userId = userRepository.uid
         self.text = text.stringByReplacingOccurrencesOfString("\n", withString: "")
-        
+
         let date = NSDate()
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let dateString = dateFormatter.stringFromDate(date)
         self.date = dateString
+        self.imagePath = ""
+    }
+
+    init(userRepository: UserRepository, text: String, imagePath: String) {
+        self.userId = userRepository.uid
+        self.text = text.stringByReplacingOccurrencesOfString("\n", withString: "")
+
+        let date = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let dateString = dateFormatter.stringFromDate(date)
+        self.date = dateString
+        self.imagePath = imagePath
+    }
+
+    func isExistImage() -> Bool {
+        return imagePath != ""
     }
 }

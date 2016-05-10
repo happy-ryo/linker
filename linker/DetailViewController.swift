@@ -8,6 +8,7 @@
 
 import UIKit
 import AMScrollingNavbar
+import AWSS3
 
 class DetailViewController: ScrollingNavigationViewController {
 
@@ -20,9 +21,10 @@ class DetailViewController: ScrollingNavigationViewController {
 
     private var isObserving = false
     private let defaultHeight: CGFloat = 34.0
-    
+
     var postWindow: UIWindow?
     var mainWindow: UIWindow?
+
     var timeLineRepository: TimeLineRepository? {
         didSet {
             self.configureView()
@@ -100,7 +102,7 @@ class DetailViewController: ScrollingNavigationViewController {
             notification.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
             isObserving = false
         }
-        
+
         if let timeLineRepository = self.timeLineRepository {
             timeLineRepository.endRetrieveContents()
         }
@@ -111,23 +113,14 @@ class DetailViewController: ScrollingNavigationViewController {
     }
 
     @IBAction func postContent() {
-        self.post(self.textView)
-        self.textViewHeight.constant = defaultHeight
-    }
-    
-    func post(textView:UITextView) {
-        if textView.text.characters.count == 0 {
-            return
-        }
         if let timeLineRepository = self.timeLineRepository {
-            timeLineRepository.post(ContentRepository(userRepository: UserRepository(), text: textView.text))
-            textView.text = ""
+            timeLineRepository.postFromTextView(self.textView)
         }
-        textView.resignFirstResponder()
+        self.textViewHeight.constant = defaultHeight
     }
 
     func keyboardWillShow(notification: NSNotification?) {
-        if let postWindow = self.postWindow {
+        if let _ = self.postWindow {
             return
         }
         if let notification = notification,
@@ -195,8 +188,20 @@ extension DetailViewController: UITableViewDelegate {
 
 extension DetailViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("NonImageCell", forIndexPath: indexPath) as! DetailViewCell
-        cell.loadContent((timeLineRepository?.contents[indexPath.row])!)
+
+        guard let timeLineRepository = self.timeLineRepository else {
+            return UITableViewCell()
+        }
+        let content = timeLineRepository.contents[indexPath.row]
+
+        var cellId = ""
+        if content.isExistImage() {
+            cellId = "ImageCell"
+        } else {
+            cellId = "NonImageCell"
+        }
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! DetailViewCell
+        cell.loadContent(content)
         cell.layoutMargins = UIEdgeInsetsZero
         return cell
     }
@@ -223,15 +228,17 @@ extension DetailViewController {
         postViewController.timeLineRepository = self.timeLineRepository
         postViewController.textView.becomeFirstResponder()
     }
-    
+
     func postContentFromPostView() {
         let controller = postWindow?.rootViewController as! PostViewController
-        self.post(controller.textView)
-        self.closePostView()
+        if let timeLineRepository = self.timeLineRepository {
+            timeLineRepository.post(controller)
+        }
     }
-    
+
     func closePostView() {
         mainWindow?.makeKeyAndVisible()
         postWindow = nil
     }
+
 }

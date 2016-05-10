@@ -20,8 +20,10 @@ class PostViewController: UIViewController {
     @IBOutlet weak var countButton: UIBarButtonItem!
     @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var postButton: UIBarButtonItem!
+    @IBOutlet weak var postImage: UIImageView!
 
     var timeLineRepository: TimeLineRepository?
+    var postImagePath: NSURL?
 
     override func viewWillAppear(animated: Bool) {
         textView.inputAccessoryView = accessoryView
@@ -59,38 +61,14 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
         let fetchResult = PHAsset.fetchAssetsWithALAssetURLs([pickedURL], options: nil)
         let asset = fetchResult.firstObject as! PHAsset
 
-        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) { (data: NSData?, uti: String?, UIImageOrientation, info: [NSObject: AnyObject]?) in
-            let fileUrl: NSURL = info!["PHImageFileURLKey"] as! NSURL
-            self.uploadToS3(fileUrl)
-        }
-
-    }
-
-    func uploadToS3(fileUrl: NSURL) {
-        let syncClient = AWSCognito.defaultCognito()
-        let transferManager = AWSS3TransferManager.defaultS3TransferManager()
-
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest.bucket = "linker-product"
-        uploadRequest.key = "\(self.randomStringWithLength(30)).jpeg"
-        uploadRequest.body = fileUrl
-        uploadRequest.ACL = .PublicRead
-
-        transferManager.upload(uploadRequest).continueWithBlock { (task: AWSTask) -> AnyObject? in
-            if task.completed {
-                print("success")
-            } else {
-                print("fail")
+        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: nil) { [unowned self](data: NSData?, uti: String?, UIImageOrientation, info: [NSObject: AnyObject]?) in
+            if let info = info {
+                self.postImagePath = info["PHImageFileURLKey"] as? NSURL
             }
-            return nil
+            picker.dismissViewControllerAnimated(true, completion: nil)
+            self.textView.becomeFirstResponder()
         }
+
     }
 
-    func randomStringWithLength(length: Int) -> String {
-        let alphabet = "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        let upperBound = UInt32(alphabet.characters.count)
-        return String((0 ..< length).map { _ -> Character in
-            return alphabet[alphabet.startIndex.advancedBy(Int(arc4random_uniform(upperBound)))]
-        })
-    }
 }

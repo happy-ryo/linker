@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class DetailViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
@@ -15,5 +16,14 @@ class DetailViewCell: UITableViewCell {
     func loadContent(content: ContentRepository) {
         dateLabel.text = content.date
         postLabel.text = content.text
+    }
+}
+
+class ImageViewCell: DetailViewCell {
+    @IBOutlet weak var contentImageView: UIImageView?
+
+    override func loadContent(content: ContentRepository) {
+        super.loadContent(content)
+        contentImageView?.sd_setImageWithURL(NSURL(string: content.imagePath))
     }
 }
