@@ -64,6 +64,7 @@ class TimeLineRepository: RootRepository {
         uploadRequest.ACL = .PublicRead
         uploadRequest.contentType = "image/jpeg"
         uploadRequest.storageClass = .ReducedRedundancy
+        
 
         transferManager.upload(uploadRequest).continueWithBlock { (task: AWSTask) -> AnyObject? in
             if task.error == nil && task.exception == nil {

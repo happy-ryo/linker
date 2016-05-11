@@ -10,6 +10,23 @@ import UIKit
 import AMScrollingNavbar
 import AWSS3
 
+extension UIColor {
+    class func hexStr (hexStr: NSString, alpha: CGFloat) -> UIColor {
+        let hexStr = hexStr.stringByReplacingOccurrencesOfString("#", withString: "")
+        let scanner = NSScanner(string: hexStr as String)
+        var color: UInt32 = 0
+        if scanner.scanHexInt(&color) {
+            let r = CGFloat((color & 0xFF0000) >> 16) / 255.0
+            let g = CGFloat((color & 0x00FF00) >> 8) / 255.0
+            let b = CGFloat(color & 0x0000FF) / 255.0
+            return UIColor(red: r, green: g, blue: b, alpha: alpha)
+        } else {
+            print("invalid hex string")
+            return UIColor.whiteColor();
+        }
+    }
+}
+
 class DetailViewController: ScrollingNavigationViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -21,6 +38,8 @@ class DetailViewController: ScrollingNavigationViewController {
 
     private var isObserving = false
     private let defaultHeight: CGFloat = 34.0
+
+    var scrollBarView: UIView!
 
     var postWindow: UIWindow?
     var mainWindow: UIWindow?
@@ -48,12 +67,17 @@ class DetailViewController: ScrollingNavigationViewController {
         super.viewDidLoad()
         self.configureView()
         timeLineRepository = TimeLineRepository(category: CategoryRepository(id: "hoge", name: "hoge"))
+
+        let rect = CGRectMake(UIScreen.mainScreen().bounds.size.width - 15, 0, 5, 60)
+        self.scrollBarView = UIView(frame: rect)
+        self.scrollBarView.backgroundColor = UIColor.hexStr("96E8D8", alpha: 1.0)
+        self.tableView.addSubview(self.scrollBarView)
     }
 
     override func viewWillAppear(animated: Bool) {
         if let tableView = self.tableView {
             tableView.rowHeight = UITableViewAutomaticDimension
-            tableView.estimatedRowHeight = 80
+            tableView.estimatedRowHeight = 120
             self.scrollViewShouldScrollToTop(tableView)
         }
         if !isObserving {
@@ -150,6 +174,25 @@ class DetailViewController: ScrollingNavigationViewController {
     @IBAction func back() {
         self.splitViewController?.performSelector((self.splitViewController?.displayModeButtonItem().action)!)
         self.splitViewController?.popoverPresentationController
+    }
+}
+
+extension DetailViewController {
+    func scrollIndicator(scrollView: UIScrollView) -> UIView? {
+        let lastSubView = scrollView.subviews[scrollView.subviews.endIndex - 1]
+        if lastSubView.isKindOfClass(UIView) {
+            return lastSubView
+        }
+        return nil
+    }
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let indicator = self.scrollIndicator(scrollView)
+        var frame = self.scrollBarView.frame
+        frame.origin.y = (indicator?.frame.origin.y)!
+        UIView.animateWithDuration(0.01) { [unowned self] in
+            self.scrollBarView.frame = frame
+        }
     }
 }
 

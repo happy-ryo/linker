@@ -54,17 +54,18 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
 
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
+        self.textView.becomeFirstResponder()
     }
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String: AnyObject]?) {
         let docDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         let fileName = "hoge.png"
         let filePath = "\(docDir)/\(fileName)"
         let png = UIImagePNGRepresentation(image)
         do {
-          try NSFileManager.defaultManager().removeItemAtPath(filePath)
+            try NSFileManager.defaultManager().removeItemAtPath(filePath)
         } catch {
-            
+
         }
         try! png?.writeToFile(filePath, options: NSDataWritingOptions.DataWritingWithoutOverwriting)
         self.postImagePath = NSURL(string: "file://\(filePath)")

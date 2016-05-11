@@ -23,7 +23,7 @@ class ImageViewCell: DetailViewCell {
     @IBOutlet weak var contentImageView: UIImageView?
 
     override func loadContent(content: ContentRepository) {
-        super.loadContent(content)
+        super.loadContent(content)        
         contentImageView?.sd_setImageWithURL(NSURL(string: content.imagePath))
     }
 }
