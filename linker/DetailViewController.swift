@@ -40,6 +40,7 @@ class DetailViewController: ScrollingNavigationViewController {
     private let defaultHeight: CGFloat = 34.0
 
     var scrollBarView: UIView!
+    var scrollBarBaseView: UIView!
 
     var postWindow: UIWindow?
     var mainWindow: UIWindow?
@@ -58,18 +59,23 @@ class DetailViewController: ScrollingNavigationViewController {
     }
 
     func configureView() {
-        // Update the user interface for the detail item.
-//        if let detail = self.detailItem {
-//        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
         timeLineRepository = TimeLineRepository(category: CategoryRepository(id: "hoge", name: "hoge"))
+        
+        let scrollBaseRect = CGRectMake(UIScreen.mainScreen().bounds.size.width - 20,
+                                        0,
+                                        10,
+                                        UIScreen.mainScreen().bounds.size.height)
+        self.scrollBarBaseView = UIView(frame: scrollBaseRect)
+        self.scrollBarBaseView.backgroundColor = UIColor.hexStr("FFFFFF", alpha: 0.5)
+        self.tableView.addSubview(self.scrollBarBaseView)
 
-        let rect = CGRectMake(UIScreen.mainScreen().bounds.size.width - 15, 0, 5, 60)
-        self.scrollBarView = UIView(frame: rect)
+        let scrollRect = CGRectMake(UIScreen.mainScreen().bounds.size.width - 20, 0, 10, 60)
+        self.scrollBarView = UIView(frame: scrollRect)
         self.scrollBarView.backgroundColor = UIColor.hexStr("96E8D8", alpha: 1.0)
         self.tableView.addSubview(self.scrollBarView)
     }
@@ -190,8 +196,12 @@ extension DetailViewController {
         let indicator = self.scrollIndicator(scrollView)
         var frame = self.scrollBarView.frame
         frame.origin.y = (indicator?.frame.origin.y)!
-        UIView.animateWithDuration(0.01) { [unowned self] in
+        
+        var baseFrame = self.scrollBarBaseView.frame
+        baseFrame.size.height = scrollView.contentSize.height
+        UIView.animateWithDuration(0.00) { [unowned self] in
             self.scrollBarView.frame = frame
+            self.scrollBarBaseView.frame = baseFrame
         }
     }
 }
