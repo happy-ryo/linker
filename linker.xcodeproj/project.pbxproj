@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		890482A01CD829020086BCC8 /* DetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8904829F1CD829020086BCC8 /* DetailViewCell.swift */; };
 		890482A21CD82B480086BCC8 /* ContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890482A11CD82B480086BCC8 /* ContentRepository.swift */; };
+		8916AFA81CFB321D00CC9555 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916AFA71CFB321D00CC9555 /* ImageDetailViewController.swift */; };
 		8917D82D1CDC408600707419 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917D82C1CDC408600707419 /* PostViewController.swift */; };
 		8967041E1CD77B2800041C8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8967041D1CD77B2800041C8C /* AppDelegate.swift */; };
 		896704201CD77B2800041C8C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8967041F1CD77B2800041C8C /* MasterViewController.swift */; };
@@ -54,6 +55,7 @@
 		840E3377B8D52FC05E765D93 /* Pods-linker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-linker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-linker/Pods-linker.debug.xcconfig"; sourceTree = "<group>"; };
 		8904829F1CD829020086BCC8 /* DetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewCell.swift; sourceTree = "<group>"; };
 		890482A11CD82B480086BCC8 /* ContentRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentRepository.swift; sourceTree = "<group>"; };
+		8916AFA71CFB321D00CC9555 /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		8917D82C1CDC408600707419 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		8967041A1CD77B2800041C8C /* linker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = linker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8967041D1CD77B2800041C8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				89A8282C1CDA350400BE9788 /* ChatViewController.swift */,
 				89A8282E1CDA351F00BE9788 /* ChatTimeLineViewController.swift */,
+				8916AFA71CFB321D00CC9555 /* ImageDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				89A8282B1CD9B5FB00BE9788 /* DeviceConst.swift in Sources */,
 				890482A01CD829020086BCC8 /* DetailViewCell.swift in Sources */,
 				89A828241CD8824E00BE9788 /* CategoryRepository.swift in Sources */,
+				8916AFA81CFB321D00CC9555 /* ImageDetailViewController.swift in Sources */,
 				896704201CD77B2800041C8C /* MasterViewController.swift in Sources */,
 				89A8282F1CDA351F00BE9788 /* ChatTimeLineViewController.swift in Sources */,
 				8917D82D1CDC408600707419 /* PostViewController.swift in Sources */,

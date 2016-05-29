@@ -219,6 +219,7 @@
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aQF-wf-yae">
                                                     <rect key="frame" x="61" y="47" width="471" height="40"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="VSO-Bh-gvV"/>
                                                     </constraints>
@@ -242,6 +243,7 @@
                                             <outlet property="contentImageView" destination="aQF-wf-yae" id="dGf-sa-zoW"/>
                                             <outlet property="dateLabel" destination="Fr9-VH-B8M" id="odt-1q-CRL"/>
                                             <outlet property="postLabel" destination="wer-Wf-JMb" id="EwP-Jh-dTf"/>
+                                            <segue destination="RbD-xI-dPJ" kind="presentation" identifier="ImageDetail" modalTransitionStyle="crossDissolve" id="rs2-25-w0G"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -332,6 +334,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KuW-4o-fpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="801" y="119"/>
+        </scene>
+        <!--Image Detail View Controller-->
+        <scene sceneID="jnw-ev-78x">
+            <objects>
+                <viewController id="RbD-xI-dPJ" customClass="ImageDetailViewController" customModule="linker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HoZ-yh-1Zf"/>
+                        <viewControllerLayoutGuide type="bottom" id="lSt-B0-Joc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m40-Up-Sbz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AG8-uc-BhF">
+                                <rect key="frame" x="20" y="40" width="560" height="540"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eJa-um-bE7" appends="YES" id="Cz2-K0-RVj"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AG8-uc-BhF" firstAttribute="top" secondItem="HoZ-yh-1Zf" secondAttribute="bottom" constant="20" id="0hv-lc-3oL"/>
+                            <constraint firstItem="AG8-uc-BhF" firstAttribute="leading" secondItem="m40-Up-Sbz" secondAttribute="leading" constant="20" id="5tW-5j-yJz"/>
+                            <constraint firstItem="lSt-B0-Joc" firstAttribute="top" secondItem="AG8-uc-BhF" secondAttribute="bottom" constant="20" id="S6s-ye-B8G"/>
+                            <constraint firstAttribute="trailing" secondItem="AG8-uc-BhF" secondAttribute="trailing" constant="20" id="l6Y-nf-bBW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="AG8-uc-BhF" id="OSi-e9-qF4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Hc-zF-cue" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="eJa-um-bE7">
+                    <connections>
+                        <action selector="closeViewControllre" destination="RbD-xI-dPJ" id="7uB-TY-Cct"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1448" y="119"/>
         </scene>
         <!--Chat Time Line View Controller-->
         <scene sceneID="d3f-EV-xZR">

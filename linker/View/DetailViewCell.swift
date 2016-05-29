@@ -13,9 +13,11 @@ import SDWebImage
 class DetailViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var postLabel: UILabel!
+    var contentRepository: ContentRepository?
     func loadContent(content: ContentRepository) {
         dateLabel.text = content.date
         postLabel.text = content.text
+        contentRepository = content
     }
 }
 
@@ -25,5 +27,9 @@ class ImageViewCell: DetailViewCell {
     override func loadContent(content: ContentRepository) {
         super.loadContent(content)        
         contentImageView?.sd_setImageWithURL(NSURL(string: content.imagePath))
+    }
+    
+    @IBAction func openImageDetailView() {
+        
     }
 }
