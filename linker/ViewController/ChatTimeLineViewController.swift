@@ -12,15 +12,15 @@ import UIKit
 class ChatTimeLineViewController: UITableViewController {
     var timeLineRepository: TimeLineRepository?
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let timeLineRepository = self.timeLineRepository else {
             return 0
         }
         return timeLineRepository.contents.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         if let timeLineRepository = self.timeLineRepository {
             cell.textLabel?.text = timeLineRepository.contents[indexPath.row].text
         }
@@ -29,26 +29,26 @@ class ChatTimeLineViewController: UITableViewController {
 }
 
 extension ChatTimeLineViewController {
-    override func willMoveToParentViewController(parent: UIViewController?) {
+    override func willMove(toParentViewController parent: UIViewController?) {
         let viewController = parent as! ChatViewController
         if let timeLineRepository = viewController.timeLineRepository {
             self.timeLineRepository = timeLineRepository
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 80.0
         if let timeLineRepository = self.timeLineRepository {
             timeLineRepository.retrieveContents({[unowned self] (content) in
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+                let indexPath = IndexPath(row: 0, section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             })
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if let timeLineRepository = self.timeLineRepository {
             timeLineRepository.endRetrieveContents()
         }

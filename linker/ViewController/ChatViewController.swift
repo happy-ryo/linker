@@ -17,8 +17,8 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     
-    private var isObserving = false
-    private let defaultHeight:CGFloat = 30.0
+    fileprivate var isObserving = false
+    fileprivate let defaultHeight:CGFloat = 30.0
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,26 +29,26 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()        
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if !isObserving {
-            let notification = NSNotificationCenter.defaultCenter()
-            notification.addObserver(self, selector:#selector(DetailViewController.keyboardWillShow(_:)) , name: UIKeyboardWillShowNotification, object: nil)
-            notification.addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+            let notification = NotificationCenter.default
+            notification.addObserver(self, selector:#selector(DetailViewController.keyboardWillShow(_:)) , name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            notification.addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
             isObserving = true
         }
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if isObserving {
-            let notification = NSNotificationCenter.defaultCenter()
+            let notification = NotificationCenter.default
             notification.removeObserver(self)
-            notification.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-            notification.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+            notification.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            notification.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
             isObserving = false
         }
     }
@@ -66,24 +66,24 @@ class ChatViewController: UIViewController {
         textView.resignFirstResponder()
     }
     
-    func keyboardWillShow(notification: NSNotification?) {
+    func keyboardWillShow(_ notification: Notification?) {
         if let notification = notification ,
             let userInfo = notification.userInfo,
             let frameEndUserInfoKey = userInfo[UIKeyboardFrameEndUserInfoKey],
             let durationUserInfoKey = userInfo[UIKeyboardAnimationDurationUserInfoKey]{
-            let rect = frameEndUserInfoKey.CGRectValue()
-            let duration = durationUserInfoKey.doubleValue
-            UIView.animateWithDuration(duration, animations: {
-                let transform = CGAffineTransformMakeTranslation(0, -rect.size.height)
+            let rect = (frameEndUserInfoKey as AnyObject).cgRectValue
+            let duration = (durationUserInfoKey as AnyObject).doubleValue
+            UIView.animate(withDuration: duration!, animations: {
+                let transform = CGAffineTransform(translationX: 0, y: -(rect?.size.height)!)
                 self.view.transform = transform
                 }, completion: nil)
         }
     }
     
-    func keyboardWillHide(notification: NSNotification?) {
+    func keyboardWillHide(_ notification: Notification?) {
         let duration = (notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double)
-        UIView.animateWithDuration(duration, animations:{
-            self.view.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: duration, animations:{
+            self.view.transform = CGAffineTransform.identity
             },
                                    completion:nil)
     }

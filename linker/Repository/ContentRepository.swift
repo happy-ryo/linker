@@ -23,24 +23,24 @@ struct ContentRepository {
 
     init(userRepository: UserRepository, text: String) {
         self.userId = userRepository.uid
-        self.text = text.stringByReplacingOccurrencesOfString("\n", withString: "")
+        self.text = text.replacingOccurrences(of: "\n", with: "")
 
-        let date = NSDate()
-        let dateFormatter = NSDateFormatter()
+        let date = Date()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        let dateString = dateFormatter.stringFromDate(date)
+        let dateString = dateFormatter.string(from: date)
         self.date = dateString
         self.imagePath = ""
     }
 
     init(userRepository: UserRepository, text: String, imagePath: String) {
         self.userId = userRepository.uid
-        self.text = text.stringByReplacingOccurrencesOfString("\n", withString: "")
+        self.text = text.replacingOccurrences(of: "\n", with: "")
 
-        let date = NSDate()
-        let dateFormatter = NSDateFormatter()
+        let date = Date()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        let dateString = dateFormatter.stringFromDate(date)
+        let dateString = dateFormatter.string(from: date)
         self.date = dateString
         self.imagePath = imagePath
     }

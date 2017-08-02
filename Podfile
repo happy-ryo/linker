@@ -17,6 +17,7 @@ pod "PKHUD"
 pod 'AMScrollingNavbar', '~> 2.0.1'
 pod 'AWSS3'
 pod 'AWSCognito'
+pod 'FirebaseStorage'
 end
 
 target 'linkerTests' do

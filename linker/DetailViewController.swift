@@ -11,18 +11,18 @@ import AMScrollingNavbar
 import AWSS3
 
 extension UIColor {
-	class func hexStr (hexStr: NSString, alpha: CGFloat) -> UIColor {
-		let hexStr = hexStr.stringByReplacingOccurrencesOfString("#", withString: "")
-		let scanner = NSScanner(string: hexStr as String)
+	class func hexStr (_ hexStr: NSString, alpha: CGFloat) -> UIColor {
+		let hexStr = hexStr.replacingOccurrences(of: "#", with: "")
+		let scanner = Scanner(string: hexStr as String)
 		var color: UInt32 = 0
-		if scanner.scanHexInt(&color) {
+		if scanner.scanHexInt32(&color) {
 			let r = CGFloat((color & 0xFF0000) >> 16) / 255.0
 			let g = CGFloat((color & 0x00FF00) >> 8) / 255.0
 			let b = CGFloat(color & 0x0000FF) / 255.0
 			return UIColor(red: r, green: g, blue: b, alpha: alpha)
 		} else {
 			print("invalid hex string")
-			return UIColor.whiteColor();
+			return UIColor.white;
 		}
 	}
 }
@@ -36,8 +36,8 @@ class DetailViewController: ScrollingNavigationViewController {
 	@IBOutlet weak var textViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var tableViewHeight: NSLayoutConstraint!
 
-	private var isObserving = false
-	private let defaultHeight: CGFloat = 34.0
+	fileprivate var isObserving = false
+	fileprivate let defaultHeight: CGFloat = 34.0
 
 	var scrollBarView: UIView!
 	var scrollBarBaseView: UIView!
@@ -66,21 +66,21 @@ class DetailViewController: ScrollingNavigationViewController {
 		self.configureView()
 		timeLineRepository = TimeLineRepository(category: CategoryRepository(id: "hoge", name: "hoge"))
 
-		let scrollBaseRect = CGRectMake(UIScreen.mainScreen().bounds.size.width - 10,
-			0,
-			10,
-			UIScreen.mainScreen().bounds.size.height)
+		let scrollBaseRect = CGRect(x: UIScreen.main.bounds.size.width - 10,
+			y: 0,
+			width: 10,
+			height: UIScreen.main.bounds.size.height)
 		self.scrollBarBaseView = UIView(frame: scrollBaseRect)
 		self.scrollBarBaseView.backgroundColor = UIColor.hexStr("FFFFFF", alpha: 0.5)
 		self.tableView.addSubview(self.scrollBarBaseView)
 
-		let scrollRect = CGRectMake(UIScreen.mainScreen().bounds.size.width - 10, 0, 10, 60)
+		let scrollRect = CGRect(x: UIScreen.main.bounds.size.width - 10, y: 0, width: 10, height: 60)
 		self.scrollBarView = UIView(frame: scrollRect)
 		self.scrollBarView.backgroundColor = UIColor.hexStr("96E8D8", alpha: 1.0)
 		self.tableView.addSubview(self.scrollBarView)
         
         for view in self.tableView.subviews {
-            if view.isKindOfClass(UIImageView) {
+            if view.isKind(of: UIImageView.self) {
                 if let imageview = view as? UIImageView {
                     imageview.image = UIImage(named: "")
                 }
@@ -88,32 +88,32 @@ class DetailViewController: ScrollingNavigationViewController {
         }
 	}
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		if let tableView = self.tableView {
 			tableView.rowHeight = UITableViewAutomaticDimension
 			tableView.estimatedRowHeight = 120
 			self.scrollViewShouldScrollToTop(tableView)
 		}
-		if !isObserving {
-			let notification = NSNotificationCenter.defaultCenter()
-			notification.addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-			notification.addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-			isObserving = true
-		}
+        if !isObserving {
+            let notification = NotificationCenter.default
+            notification.addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            notification.addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            isObserving = true
+        }
 
 		self.followScrollView()
 
 		if let timeLineRepository = self.timeLineRepository {
 			timeLineRepository.retrieveContents({ [unowned self](content) in
-				let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-				self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-				self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+				let indexPath = IndexPath(row: 0, section: 0)
+				self.tableView.insertRows(at: [indexPath], with: .automatic)
+				self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
 			})
 		}
 		self.postButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(DetailViewController.openPostView)))
 	}
 
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		if let navigationController = self.navigationController as? ScrollingNavigationController {
 			navigationController.setNavigationBarHidden(true, animated: true)
 		}
@@ -131,13 +131,13 @@ class DetailViewController: ScrollingNavigationViewController {
 		}
 	}
 
-	override func viewWillDisappear(animated: Bool) {
+	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		if isObserving {
-			let notification = NSNotificationCenter.defaultCenter()
+			let notification = NotificationCenter.default
 			notification.removeObserver(self)
-			notification.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-			notification.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+			notification.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+			notification.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 			isObserving = false
 		}
 
@@ -157,8 +157,8 @@ class DetailViewController: ScrollingNavigationViewController {
 		self.textViewHeight.constant = defaultHeight
 	}
 
-	func keyboardWillShow(notification: NSNotification?) {
-		if UIApplication.sharedApplication().applicationState != UIApplicationState.Active {
+	func keyboardWillShow(_ notification: Notification?) {
+		if UIApplication.shared.applicationState != UIApplicationState.active {
 			return
 		} else if let _ = self.postWindow {
 			return
@@ -168,10 +168,10 @@ class DetailViewController: ScrollingNavigationViewController {
 			let userInfo = notification.userInfo,
 			let frameEndUserInfoKey = userInfo[UIKeyboardFrameEndUserInfoKey],
 			let durationUserInfoKey = userInfo[UIKeyboardAnimationDurationUserInfoKey] {
-				let rect = frameEndUserInfoKey.CGRectValue()
-				let duration = durationUserInfoKey.doubleValue
-				UIView.animateWithDuration(duration, animations: {
-					let transform = CGAffineTransformMakeTranslation(0, -rect.size.height)
+				let rect = (frameEndUserInfoKey as AnyObject).cgRectValue
+				let duration = (durationUserInfoKey as AnyObject).doubleValue
+				UIView.animate(withDuration: duration!, animations: {
+					let transform = CGAffineTransform(translationX: 0, y: -(rect?.size.height)!)
 					self.postView.transform = transform
 					}, completion: { [unowned self](flg: Bool) in
 					self.unFollowScrollView()
@@ -179,14 +179,14 @@ class DetailViewController: ScrollingNavigationViewController {
 		}
 	}
 
-	func keyboardWillHide(notification: NSNotification?) {
-		if UIApplication.sharedApplication().applicationState != UIApplicationState.Active {
+	func keyboardWillHide(_ notification: Notification?) {
+		if UIApplication.shared.applicationState != UIApplicationState.active {
 			return
 		}
 
 		let duration = (notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double)
-		UIView.animateWithDuration(duration, animations: {
-			self.postView.transform = CGAffineTransformIdentity
+		UIView.animate(withDuration: duration, animations: {
+			self.postView.transform = CGAffineTransform.identity
 			}, completion: { [unowned self](flg: Bool) in
 			self.followScrollView()
 		})
@@ -199,37 +199,37 @@ class DetailViewController: ScrollingNavigationViewController {
 }
 
 extension DetailViewController {
-	func scrollIndicator(scrollView: UIScrollView) -> UIView? {
+	func scrollIndicator(_ scrollView: UIScrollView) -> UIView? {
 		let lastSubView = scrollView.subviews[scrollView.subviews.endIndex - 1]
-		if lastSubView.isKindOfClass(UIView) {
+		if lastSubView.isKind(of: UIView.self) {
 			return lastSubView
 		}
 		return nil
 	}
 
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let indicator = self.scrollIndicator(scrollView)
 		var frame = self.scrollBarView.frame
 		frame.origin.y = (indicator?.frame.origin.y)!
 
 		var baseFrame = self.scrollBarBaseView.frame
 		baseFrame.size.height = scrollView.contentSize.height
-		UIView.animateWithDuration(0.00) { [unowned self] in
+		UIView.animate(withDuration: 0.00, animations: { [unowned self] in
 			self.scrollBarView.frame = frame
 			self.scrollBarBaseView.frame = baseFrame
-		}
+		}) 
 	}
 }
 
 extension DetailViewController {
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepareForSegue(_ segue: UIStoryboardSegue, sender: AnyObject?) {
 		guard let identifier = segue.identifier else {
 			return
 		}
 		if identifier == "ImageDetail" {
-			let controller = segue.destinationViewController as! ImageDetailViewController
-			controller.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-            if let imageViewCell = sender as? ImageViewCell where imageViewCell.contentRepository != nil{
+			let controller = segue.destination as! ImageDetailViewController
+			controller.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            if let imageViewCell = sender as? ImageViewCell, imageViewCell.contentRepository != nil{
                 controller.contentRepository = imageViewCell.contentRepository
             }
 		}
@@ -237,40 +237,40 @@ extension DetailViewController {
 }
 
 extension DetailViewController: UITextViewDelegate {
-	func textViewDidChange(textView: UITextView) {
+	func textViewDidChange(_ textView: UITextView) {
 		let maxHeight: CGFloat = 90.0
 		let size = self.textView.sizeThatFits(self.textView.frame.size)
 		if size.height < maxHeight {
 			self.textViewHeight.constant = size.height
 		}
 		if textView.text.characters.count > 30 {
-			self.postButton.enabled = false
+			self.postButton.isEnabled = false
 		} else {
-			self.postButton.enabled = true
+			self.postButton.isEnabled = true
 		}
 	}
 
-	func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 		self.textView.scrollRangeToVisible(self.textView.selectedRange)
 		return true
 	}
 }
 
 extension DetailViewController: UITableViewDelegate {
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		guard let timeLineRepository = timeLineRepository else {
 			return 0
 		}
 		return timeLineRepository.contents.count
 	}
 
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }
 
 extension DetailViewController: UITableViewDataSource {
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		guard let timeLineRepository = self.timeLineRepository else {
 			return UITableViewCell()
@@ -283,9 +283,9 @@ extension DetailViewController: UITableViewDataSource {
 		} else {
 			cellId = "NonImageCell"
 		}
-		let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! DetailViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DetailViewCell
 		cell.loadContent(content)
-		cell.layoutMargins = UIEdgeInsetsZero
+		cell.layoutMargins = UIEdgeInsets.zero
 		return cell
 	}
 }
@@ -296,8 +296,8 @@ extension DetailViewController {
 			return
 		}
 		self.textView.resignFirstResponder()
-		mainWindow = UIApplication.sharedApplication().keyWindow
-		let rect = UIScreen.mainScreen().bounds
+		mainWindow = UIApplication.shared.keyWindow
+		let rect = UIScreen.main.bounds
 		let window = UIWindow(frame: rect)
 		window.windowLevel = UIWindowLevelNormal + 5.0
 		let postViewController = PostViewController(nibName: "PostView", bundle: nil)

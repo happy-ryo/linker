@@ -15,8 +15,8 @@ class UserRepository: NSObject {
     var uid: String!
     var token: String!
     
-    private let linkerUserIdKey = "LinkerUserId"
-    private let linkerUserTokenKey = "LinkerUserToken"
+    fileprivate let linkerUserIdKey = "LinkerUserId"
+    fileprivate let linkerUserTokenKey = "LinkerUserToken"
     
     override init() {
         let keyChain = Keychain()
@@ -28,10 +28,10 @@ class UserRepository: NSObject {
         }
     }
     
-    func registration(success:()->Void, failer:(NSError)->Void) {
+    func registration(_ success:@escaping ()->Void, failer:@escaping (NSError)->Void) {
         let myRootRef = Firebase(url: DeviceConst().firebaseRoot)
         if let token = token {
-            myRootRef.authWithCustomToken(token, withCompletionBlock: {[unowned self] (error:NSError!, authData:FAuthData!) in
+            myRootRef.auth(withCustomToken: token, withCompletionBlock: {[unowned self] (error:NSError!, authData:FAuthData!) in
                 if let _ = error {
                     self.registration(success ,failer: failer)
                 } else {
@@ -40,7 +40,7 @@ class UserRepository: NSObject {
                 }
             })
         } else {
-            myRootRef.authAnonymouslyWithCompletionBlock {[unowned self] (error:NSError!, authDAta:FAuthData!) in
+            myRootRef?.authAnonymously {[unowned self] (error:NSError!, authDAta:FAuthData!) in
                 if let error = error {
                     failer(error)
                 } else {
@@ -59,7 +59,7 @@ class UserRepository: NSObject {
         keyChain[linkerUserIdKey] = nil
     }
     
-    func saveToken(authData: FAuthData!) {
+    func saveToken(_ authData: FAuthData!) {
         self.token = authData.token
         self.uid = authData.uid
         let keyChain = Keychain()

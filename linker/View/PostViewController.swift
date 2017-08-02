@@ -23,20 +23,20 @@ class PostViewController: UIViewController {
     @IBOutlet weak var postImage: UIImageView!
 
     var timeLineRepository: TimeLineRepository?
-    var postImagePath: NSURL?
+    var postImagePath: URL?
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         textView.inputAccessoryView = accessoryView
     }
 }
 
 extension PostViewController: UITextViewDelegate {
-    func textViewDidChange(textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         let count = 30 - textView.text.characters.count
         if count < 0 {
-            postButton.enabled = false
+            postButton.isEnabled = false
         } else {
-            postButton.enabled = true
+            postButton.isEnabled = true
         }
         countButton.title = "\(count)"
     }
@@ -44,32 +44,32 @@ extension PostViewController: UITextViewDelegate {
 
 extension PostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBAction func openPhotolibrary() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
             let picker = UIImagePickerController()
-            picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
             picker.delegate = self
-            self.presentViewController(picker, animated: true, completion: nil)
+            self.present(picker, animated: true, completion: nil)
         }
     }
 
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
         self.textView.becomeFirstResponder()
     }
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String: AnyObject]?) {
-        let docDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String: AnyObject]?) {
+        let docDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let fileName = "hoge.png"
         let filePath = "\(docDir)/\(fileName)"
         let png = UIImagePNGRepresentation(image)
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(filePath)
+            try FileManager.default.removeItem(atPath: filePath)
         } catch {
 
         }
-        try! png?.writeToFile(filePath, options: NSDataWritingOptions.DataWritingWithoutOverwriting)
-        self.postImagePath = NSURL(string: "file://\(filePath)")
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        try! png?.write(to: URL(fileURLWithPath: filePath), options: NSData.WritingOptions.withoutOverwriting)
+        self.postImagePath = URL(string: "file://\(filePath)")
+        picker.dismiss(animated: true, completion: nil)
         self.postImage.image = image
         self.textView.becomeFirstResponder()
     }

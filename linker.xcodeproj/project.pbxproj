@@ -292,13 +292,16 @@
 					896704191CD77B2800041C8C = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = X9AMR5X2G8;
+						LastSwiftMigration = 0810;
 					};
 					8967042F1CD77B2800041C8C = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0810;
 						TestTargetID = 896704191CD77B2800041C8C;
 					};
 					8967043A1CD77B2800041C8C = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0810;
 						TestTargetID = 896704191CD77B2800041C8C;
 					};
 				};
@@ -580,6 +583,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.citronsyrup.linker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -596,6 +600,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.citronsyrup.linker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -607,6 +612,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.citronsyrup.linker.linkerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/linker.app/linker";
 			};
 			name = Debug;
@@ -619,6 +625,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.citronsyrup.linker.linkerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/linker.app/linker";
 			};
 			name = Release;
@@ -630,6 +637,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.citronsyrup.linker.linkerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = linker;
 				USES_XCTRUNNER = YES;
 			};
@@ -642,6 +650,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.citronsyrup.linker.linkerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = linker;
 				USES_XCTRUNNER = YES;
 			};

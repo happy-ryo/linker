@@ -14,7 +14,7 @@ class DetailViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var postLabel: UILabel!
     var contentRepository: ContentRepository?
-    func loadContent(content: ContentRepository) {
+    func loadContent(_ content: ContentRepository) {
         dateLabel.text = content.date
         postLabel.text = content.text
         contentRepository = content
@@ -24,9 +24,9 @@ class DetailViewCell: UITableViewCell {
 class ImageViewCell: DetailViewCell {
     @IBOutlet weak var contentImageView: UIImageView?
 
-    override func loadContent(content: ContentRepository) {
+    override func loadContent(_ content: ContentRepository) {
         super.loadContent(content)        
-        contentImageView?.sd_setImageWithURL(NSURL(string: content.imagePath))
+        contentImageView?.sd_setImage(with: URL(string: content.imagePath))
     }
     
     @IBAction func openImageDetailView() {

@@ -13,15 +13,15 @@ class ImageDetailViewController: UIViewController {
 	@IBOutlet weak var imageView: UIImageView!
 	var contentRepository: ContentRepository?
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		guard let contentRepository = contentRepository else {
 			return
 		}
-		imageView.sd_setImageWithURL(NSURL(string: contentRepository.imagePath))
+		imageView.sd_setImage(with: URL(string: contentRepository.imagePath))
 	}
 
 	@IBAction func closeViewControllre() {
-		self.dismissViewControllerAnimated(true, completion: nil)
+		self.dismiss(animated: true, completion: nil)
 	}
     
 }

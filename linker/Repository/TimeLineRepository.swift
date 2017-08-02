@@ -21,8 +21,8 @@ class TimeLineRepository: RootRepository {
         super.init(childPath: "chat/\(category.id)/contents")
     }
 
-    func retrieveContents(completeHandler: (content: ContentRepository) -> Void) {
-        self.myRootRef.observeEventType(FEventType.ChildAdded) { [weak self](snapShot: FDataSnapshot!) in
+    func retrieveContents(_ completeHandler: @escaping (_ content: ContentRepository) -> Void) {
+        self.myRootRef.observe(FEventType.childAdded) { [weak self](snapShot: FDataSnapshot!) in
             let valueDict = snapShot.value as! NSDictionary
             var imageURL = ""
             if let imagePath = valueDict["imagePath"] as? String {
@@ -34,7 +34,7 @@ class TimeLineRepository: RootRepository {
                 date: valueDict["date"] as! String,
                 imagePath: imageURL)
             if let weakSelf = self {
-                weakSelf.contents.insert(content, atIndex: 0)
+                weakSelf.contents.insert(content, at: 0)
             }
             completeHandler(content: content)
         }
@@ -44,7 +44,7 @@ class TimeLineRepository: RootRepository {
         self.myRootRef.removeAllObservers()
     }
 
-    func post(content: ContentRepository) {
+    func post(_ content: ContentRepository) {
         self.myRootRef.childByAutoId().setValue([
             "uid": content.userId,
             "date": content.date,
@@ -53,7 +53,7 @@ class TimeLineRepository: RootRepository {
         ])
     }
 
-    func uploadToS3(fileUrl: NSURL, callback: (String, Bool) -> Void) {
+    func uploadToS3(_ fileUrl: URL, callback: @escaping (String, Bool) -> Void) {
         let transferManager = AWSS3TransferManager.defaultS3TransferManager()
 
         let uploadRequest = AWSS3TransferManagerUploadRequest()
@@ -77,23 +77,23 @@ class TimeLineRepository: RootRepository {
         }
     }
 
-    func randomStringWithLength(length: Int) -> String {
+    func randomStringWithLength(_ length: Int) -> String {
         let alphabet = "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         let upperBound = UInt32(alphabet.characters.count)
         return String((0 ..< length).map { _ -> Character in
-            return alphabet[alphabet.startIndex.advancedBy(Int(arc4random_uniform(upperBound)))]
+            return alphabet[alphabet.characters.index(alphabet.startIndex, offsetBy: Int(arc4random_uniform(upperBound)))]
         })
     }
 
-    func post(postViewController: PostViewController) {
+    func post(_ postViewController: PostViewController) {
         if postViewController.textView.text.characters.count == 0 {
             return
         }
         if let imagePath = postViewController.postImagePath {
             let postText = postViewController.textView.text
-            self.uploadToS3(imagePath, callback: { (fileName: String, flg: Bool) in
+            self.uploadToS3(imagePath as URL, callback: { (fileName: String, flg: Bool) in
                 if flg {
-                    self.post(ContentRepository(userRepository: UserRepository(), text: postText, imagePath: "https://s3-ap-northeast-1.amazonaws.com/linker-product/\(fileName)"))
+                    self.post(ContentRepository(userRepository: UserRepository(), text: postText!, imagePath: "https://s3-ap-northeast-1.amazonaws.com/linker-product/\(fileName)"))
                 }
             })
         } else {
@@ -104,7 +104,7 @@ class TimeLineRepository: RootRepository {
 
     }
 
-    func postFromTextView(textView: UITextView) {
+    func postFromTextView(_ textView: UITextView) {
         if textView.text.characters.count == 0 {
             return
         }
